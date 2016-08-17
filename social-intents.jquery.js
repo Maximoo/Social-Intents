@@ -83,7 +83,11 @@
                 $this._window_open();
               });
             } else if(social === "tw_rt"){
-              var tweet_id  = this.element.data("tweet-id") ? this.element.data("tweet-id") : this.element.attr("href");
+            	var tweet_id = this.element.data("tweet-id");
+            	if(!tweet_id){
+            		var aux = this.element.attr("href").split("/");
+            		tweet_id = aux[aux.length - 1];
+            	}
               this._url = this["_" + social + "_url"](tweet_id);  
               this.element.click(function( event ){
                 event.preventDefault();
