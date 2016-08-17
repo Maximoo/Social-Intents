@@ -11,7 +11,7 @@
         tw_i_urlshare: true,
         fb_appid: false
       },
-      pluginAllow = ["tw_rt","tw_i","tw","fb","fb_s","pi","gp"];
+      pluginAllow = ["tw_rt","tw_rp","tw_lk","tw_i","tw","fb","fb_s","pi","gp"];
 
     function Plugin( element, options ) {
         this.element = $(element);
@@ -49,7 +49,15 @@
             (this.settings.tw_via ? 
               '&via=' + encodeURIComponent(this.settings.tw_via) : '');
         },
+        _tw_rp_url: function(tweet_id){
+          return 'https://twitter.com/intent/retweet' +
+            '?in_reply_to=' + encodeURIComponent(tweet_id);
+        },
         _tw_rt_url: function(tweet_id){
+          return 'https://twitter.com/intent/retweet' +
+            '?tweet_id=' + encodeURIComponent(tweet_id);
+        },
+        _tw_lk_url: function(tweet_id){
           return 'https://twitter.com/intent/retweet' +
             '?tweet_id=' + encodeURIComponent(tweet_id);
         },
@@ -82,7 +90,7 @@
                 $this._url = $this["_" + social + "_url"]($this.settings.url, $this.element.find("input").val());
                 $this._window_open();
               });
-            } else if(social === "tw_rt"){
+            } else if(social === "tw_rt" || social === "tw_rp" || social === "tw_lk"){
             	var tweet_id = this.element.data("tweet-id");
             	if(!tweet_id){
             		var aux = this.element.attr("href").split("/");
