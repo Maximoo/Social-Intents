@@ -1,0 +1,28 @@
+{
+  "name": "social-intents",
+  "homepage": "https://github.com/Maximoo/Social-Intents",
+  "authors": [
+    "Fibonnacho <deluzmax@gmail.com>"
+  ],
+  "description": "Social share popups for custom share buttons",
+  "main": "social-intents.jquery.js",
+  "keywords": [
+    "social",
+    "share",
+    "popup",
+    "intents",
+    "facebook",
+    "twitter",
+    "pinterest",
+    "google",
+    "plus"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
