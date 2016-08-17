@@ -11,7 +11,7 @@
         tw_i_urlshare: true,
         fb_appid: false
       },
-      pluginAllow = ["tw_i","tw","fb","fb_s","pi","gp"];
+      pluginAllow = ["tw_rt","tw_i","tw","fb","fb_s","pi","gp"];
 
     function Plugin( element, options ) {
         this.element = $(element);
@@ -49,6 +49,10 @@
             (this.settings.tw_via ? 
               '&via=' + encodeURIComponent(this.settings.tw_via) : '');
         },
+        _tw_rt_url: function(tweet_id){
+          return 'https://twitter.com/intent/retweet' +
+            '?tweet_id=' + encodeURIComponent(tweet_id);
+        },
         _pi_url: function(url, title, image){
           return 'https://es.pinterest.com/pin/create/button/' +
             '?url=' + encodeURIComponent(url) + 
@@ -76,6 +80,13 @@
               this.element.find("button, submit").click(function( event ){
                 event.preventDefault();
                 $this._url = $this["_" + social + "_url"]($this.settings.url, $this.element.find("input").val());
+                $this._window_open();
+              });
+            } else if(social === "tw_rt"){
+              var tweet_id  = this.element.data("tweet-id") ? this.element.data("tweet-id") : this.element.attr("href");
+              this._url = this["_" + social + "_url"](tweet_id);  
+              this.element.click(function( event ){
+                event.preventDefault();
                 $this._window_open();
               });
             } else {
