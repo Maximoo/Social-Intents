@@ -11,7 +11,7 @@
         tw_i_urlshare: true,
         fb_appid: false
       },
-      pluginAllow = ["tw_rt","tw_rp","tw_lk","tw_i","tw","fb","fb_s","pi","gp"];
+      pluginAllow = ["tw_fw","tw_rt","tw_rp","tw_lk","tw_i","tw","fb","fb_s","pi","gp"];
 
     function Plugin( element, options ) {
         this.element = $(element);
@@ -61,6 +61,12 @@
           return 'https://twitter.com/intent/retweet' +
             '?tweet_id=' + encodeURIComponent(tweet_id);
         },
+        _tw_fw_url: function(user_id, screen_name){
+          return 'https://twitter.com/intent/follow' +
+            (user_id ? 
+              '&user_id=' + encodeURIComponent(user_id) : 
+              '&screen_name=' + encodeURIComponent(screen_name) );
+        },
         _pi_url: function(url, title, image){
           return 'https://es.pinterest.com/pin/create/button/' +
             '?url=' + encodeURIComponent(url) + 
@@ -97,6 +103,17 @@
             		tweet_id = aux[aux.length - 1];
             	}
               this._url = this["_" + social + "_url"](tweet_id);  
+              this.element.click(function( event ){
+                event.preventDefault();
+                $this._window_open();
+              });
+            } else if( social === "tw_fw"){
+              var user_id = this.element.data("user-id"), screen_name = this.element.data("screen-name");
+              if(!user_id && !screen_name){
+                var aux = this.element.attr("href").split("/");
+                screen_name = aux[aux.length - 1];
+              }
+              this._url = this["_" + social + "_url"](user_id, screen_name);  
               this.element.click(function( event ){
                 event.preventDefault();
                 $this._window_open();
