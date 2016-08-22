@@ -11,7 +11,7 @@
         tw_i_urlshare: true,
         fb_appid: false
       },
-      pluginAllow = ["tw_fw","tw_mp","tw_rt","tw_rp","tw_lk","tw_i","tw","fb","fb_s","pi","gp"];
+      pluginAllow = ["tw_fw","tw_pf","tw_rt","tw_rp","tw_lk","tw_i","tw","fb","fb_s","pi","gp"];
 
     function Plugin( element, options ) {
         this.element = $(element);
@@ -64,14 +64,14 @@
         _tw_fw_url: function(user_id, screen_name){
           return 'https://twitter.com/intent/follow' +
             (user_id ? 
-              '&user_id=' + encodeURIComponent(user_id) : 
-              '&screen_name=' + encodeURIComponent(screen_name) );
+              '?user_id=' + encodeURIComponent(user_id) : 
+              '?screen_name=' + encodeURIComponent(screen_name) );
         },
-        _tw_mp_url: function(user_id, screen_name){
+        _tw_pf_url: function(user_id, screen_name){
           return 'https://twitter.com/intent/user' +
             (user_id ? 
-              '&user_id=' + encodeURIComponent(user_id) : 
-              '&screen_name=' + encodeURIComponent(screen_name) );
+              '?user_id=' + encodeURIComponent(user_id) : 
+              '?screen_name=' + encodeURIComponent(screen_name) );
         },
         _pi_url: function(url, title, image){
           return 'https://es.pinterest.com/pin/create/button/' +
@@ -113,7 +113,7 @@
                 event.preventDefault();
                 $this._window_open();
               });
-            } else if( social === "tw_fw" || social === "tw_mp" ){
+            } else if( social === "tw_fw" || social === "tw_pf" ){
               var user_id = this.element.data("user-id"), screen_name = this.element.data("screen-name");
               if(!user_id && !screen_name){
                 var aux = this.element.attr("href").split("/");
