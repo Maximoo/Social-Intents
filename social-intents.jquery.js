@@ -50,7 +50,7 @@
               '&via=' + encodeURIComponent(this.settings.tw_via) : '');
         },
         _tw_rp_url: function(tweet_id){
-          return 'https://twitter.com/intent/retweet' +
+          return 'https://twitter.com/intent/tweet' +
             '?in_reply_to=' + encodeURIComponent(tweet_id);
         },
         _tw_rt_url: function(tweet_id){
@@ -58,7 +58,7 @@
             '?tweet_id=' + encodeURIComponent(tweet_id);
         },
         _tw_lk_url: function(tweet_id){
-          return 'https://twitter.com/intent/retweet' +
+          return 'https://twitter.com/intent/like' +
             '?tweet_id=' + encodeURIComponent(tweet_id);
         },
         _tw_fw_url: function(user_id, screen_name){
